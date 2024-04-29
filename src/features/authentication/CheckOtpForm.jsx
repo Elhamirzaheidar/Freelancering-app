@@ -7,6 +7,7 @@ import { checkOtp } from "../../services/authservice";
 import { useNavigate } from "react-router-dom";
 import { CiEdit } from 'react-icons/ci'
 import toast from "react-hot-toast";
+import Loading from "../../ui/Loading";
 function CheckOtpForm({ phoneNumber, onBack, onResendOtp, OtpResponse }) {
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(90);
@@ -58,7 +59,12 @@ function CheckOtpForm({ phoneNumber, onBack, onResendOtp, OtpResponse }) {
             borderRadius: "0.5rem"
           }}
         />
-        <button className="buttonFild">تایید</button>
+        
+            <div>
+          {isPending? (<Loading />) : (<button className="buttonFild" type="submit">
+          تایید
+          </button>)}
+        </div>
       </form>
     </div>
   );
