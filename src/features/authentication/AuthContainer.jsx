@@ -7,9 +7,9 @@ import toast from 'react-hot-toast';
 import { getOtp } from '../../services/authservice';
 
 function AuthContainer() {
-     const[step,setStep]=useState(1);
-     const [phoneNumber, setPhonenumber] = useState("");
-       const { isPending:isSendingOtp, mutateAsync } = useMutation({
+  const [step, setStep] = useState(1);
+  const [phoneNumber, setPhonenumber] = useState("");
+  const { isPending: isSendingOtp, mutateAsync, data: OtpResponse } = useMutation({
     mutationFn: getOtp,
   });
   const sendOtpHandler = async (e) => {
@@ -23,17 +23,17 @@ function AuthContainer() {
       toast.error(error?.response?.data?.message);
     }
   };
-     const renderStep=()=>{
-        switch (step){
-            case 1:
-                return <SendOtpForm setStep={setStep} isSendingOtp={isSendingOtp} phoneNumber={phoneNumber} onSubmit={sendOtpHandler} onChange={(e)=>setPhonenumber(e.target.value)}/>;
-                case 2:
-                    return <CheckOtpForm phoneNumber={phoneNumber} onBack={()=>setStep(1)} onResendOtp={sendOtpHandler}/>;
-                   default:
-                    return null;
-        }
-     };
-    return  <div className="w-full sm:max-w-sm">{renderStep()}</div>
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return <SendOtpForm setStep={setStep} isSendingOtp={isSendingOtp} phoneNumber={phoneNumber} onSubmit={sendOtpHandler} onChange={(e) => setPhonenumber(e.target.value)} />;
+      case 2:
+        return <CheckOtpForm phoneNumber={phoneNumber} onBack={() => setStep(1)} onResendOtp={sendOtpHandler} OtpResponse={OtpResponse} />;
+      default:
+        return null;
     }
+  };
+  return <div className="w-full sm:max-w-sm">{renderStep()}</div>
+}
 
 export default AuthContainer;

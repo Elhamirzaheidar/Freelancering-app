@@ -5,8 +5,9 @@ import { HiArrowRight } from "react-icons/hi";
 import { useMutation } from "@tanstack/react-query"
 import { checkOtp } from "../../services/authservice";
 import { useNavigate } from "react-router-dom";
+import { CiEdit } from 'react-icons/ci'
 import toast from "react-hot-toast";
-function CheckOtpForm({ phoneNumber, onBack,onResendOtp }) {
+function CheckOtpForm({ phoneNumber, onBack, onResendOtp, OtpResponse }) {
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(90);
   const navigate = useNavigate();
@@ -37,7 +38,10 @@ function CheckOtpForm({ phoneNumber, onBack,onResendOtp }) {
   return (
     <div className="mx-2" >
       <button onClick={onBack}><HiArrowRight className="w-6 h-6 text-gray-500" /></button>
-    <div className="mb-4 text-gray-400">{time >0 ? <p>{time}ثانیه تا ارسال مجدد کد</p>:<button onClick={onResendOtp}>ارسال مجدد کد تایید</button>}</div>
+      {OtpResponse && (<p className="flex items-center gap-x-2 my-4">
+        <span> {onResendOtp?.message}</span><button onClick={onBack}><CiEdit /></button></p>)}
+      <div className="mb-4 text-gray-400">
+        {time > 0 ? (<p>{time}ثانیه تا ارسال مجدد کد</p>) : (<button onClick={onResendOtp}>ارسال مجدد کد تایید</button>)}</div>
       <form action="" className="space-y-8" onSubmit={checkOtpHandler}>
         <p className="font-bold text-blue-500 my-3 ">کدتایید را وارد کنید</p>
         <OTPInput
