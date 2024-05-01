@@ -20,12 +20,10 @@ function CheckOtpForm({ phoneNumber, onBack, onResendOtp, OtpResponse }) {
     try {
       const { message, user } = await mutateAsync({ phoneNumber, otp })
       toast.success(message);
-      if (user.isActive) {
-        ///
-      } else {
-        navigate("/complete-profile");
-
-      }
+      if(!user.isActive) return navigate("/complete-profile");
+      if(user.status!==2)navigate("/");
+        if(!user.role==="owner") return navigate("/owner");
+      if(user.role==="freelancer")return navigate("/freelancer");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
