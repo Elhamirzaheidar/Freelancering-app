@@ -1,9 +1,12 @@
-import NotFoundPage from "../features/authentication/NotFoundPage"
+import NotFoundPage from "../features/authentication/NotFoundPage";
 
 function NotFound() {
   return (
-    <NotFoundPage/>
-  )
+    <div className="container xl:max-w-screen-xl">
+      {" "}
+      <NotFoundPage />
+    </div>
+  );
 }
 
-export default NotFound
+export default NotFound;

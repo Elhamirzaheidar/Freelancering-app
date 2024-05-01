@@ -1,9 +1,12 @@
-import HomePages from '../features/Home/HomePages'
+import HomePages from "../features/Home/HomePages";
 
 function Home() {
   return (
-  <HomePages/>
-  )
+    <div className="container xl:max-w-screen-xl">
+      {" "}
+      <HomePages />
+    </div>
+  );
 }
 
-export default Home
+export default Home;

@@ -1,10 +1,12 @@
-import CompleteProfileForm from "../features/CompleteProfileForm"
-
+import CompleteProfileForm from "../features/CompleteProfileForm";
 
 function Completeprofile() {
   return (
-    <CompleteProfileForm/>
-  )
+    <div className="container xl:max-w-screen-xl">
+      {" "}
+      <CompleteProfileForm />
+    </div>
+  );
 }
 
-export default Completeprofile
+export default Completeprofile;
