@@ -1,13 +1,26 @@
 import { useState } from "react";
 import Textfild from "../ui/Textfild";
 import Radio from "../ui/Radio";
+import { useMutation } from "@tanstack/react-query";
+import { completeProfile } from "../services/authservice";
+import toast from "react-hot-toast";
+import Loading from "../ui/Loading";
 
 function CompleteProfileForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState();
-  const handleSubmit = (e) => {
+  const {mutateAsync,isPending}=useMutation({
+   mutationFn:completeProfile,
+  });
+  const handleSubmit = async(e) => {
     e.preventDefault();
+       try {
+      const { message, user } = await mutateAsync({ name,email,role })
+      toast.success(message);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
   return (
     <div className="flex justify-center pt-10">
@@ -45,12 +58,12 @@ function CompleteProfileForm() {
               />
             </div>
           </div>
-          <button
-            className="bg-green-700 w-full p-3 rounded-xl my-8 text-white shadow-lg"
-            type="button"
-          >
-            تایید
-          </button>
+         
+            <div>
+          {isPending? (<Loading />) : (<button className="buttonFild" type="submit">
+          تایید
+          </button>)}
+        </div>
         </form>
       </div>
     </div>
