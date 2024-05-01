@@ -20,7 +20,7 @@ function CompleteProfileForm() {
        try {
       const { message, user } = await mutateAsync({ name,email,role });
       if(user.status!==2){navigate("/");
-      toast.error("پروفایل شما در انتظار تایید است");
+      toast.error("پروفایل شما در انتظار تایید است", {icon:"👏"});
       return;
        }
         if(!user.role==="owner") return navigate("/owner");

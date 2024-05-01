@@ -21,7 +21,10 @@ function CheckOtpForm({ phoneNumber, onBack, onResendOtp, OtpResponse }) {
       const { message, user } = await mutateAsync({ phoneNumber, otp })
       toast.success(message);
       if(!user.isActive) return navigate("/complete-profile");
-      if(user.status!==2)navigate("/");
+      if(user.status!==2){navigate("/");
+      toast.error("پروفایل شما در انتظار تایید است", {icon:"👏"});
+      return;
+       }
         if(!user.role==="owner") return navigate("/owner");
       if(user.role==="freelancer")return navigate("/freelancer");
     } catch (error) {
