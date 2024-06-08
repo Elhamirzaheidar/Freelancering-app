@@ -36,7 +36,7 @@ function App() {
              <Route index element={<Navigate to="dashboard" replace />}/>
             <Route path="dashboard" element={<FreelancerDashboard/>}/>
                <Route path="proposal" element={<Proposal/>}/>
-                <Route path="dashboard" element={<SubmitedProjects/>}/>
+                <Route path="projects" element={<SubmitedProjects/>}/>
           </Route>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />

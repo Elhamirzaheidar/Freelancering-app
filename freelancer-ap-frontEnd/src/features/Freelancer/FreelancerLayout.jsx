@@ -1,8 +1,26 @@
-import React from 'react'
+import { HiCollection, HiHome } from "react-icons/hi"
+import AppLayout from "../../ui/AppLayout"
+import CustomNavlink from "../../ui/CustomNavLink"
+import Sidebar from "../../ui/Sidebar"
 
 function FreelancerLayout() {
   return (
-    <div>FreelancerLayout</div>
+       <AppLayout>
+<Sidebar>
+    <CustomNavlink to="dashboard">
+            <HiHome/>
+            <span >داشبورد</span>
+          </CustomNavlink>
+          <CustomNavlink to="projects">
+            <HiCollection />
+            <span>پروژه ها</span>
+          </CustomNavlink>
+            <CustomNavlink to="proposal">
+            <HiHome/>
+            <span >پروپوزال</span>
+          </CustomNavlink>
+</Sidebar>
+</AppLayout>
   )
 }
 
